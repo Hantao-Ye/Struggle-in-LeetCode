@@ -47,6 +47,7 @@ vector<int> read_vector_int(fstream &in_stream)
     getline(in_stream, temp);
 
     int temp_num = 0, sign = 1;
+    bool empty = true;
     for (char c : temp)
     {
         if (c == '[')
@@ -56,16 +57,20 @@ vector<int> read_vector_int(fstream &in_stream)
         else if (c >= '0' && c <= '9')
         {
             temp_num = temp_num * 10 + c - '0';
+            empty = false;
         }
         else if (c == '-')
         {
             sign = -1;
         }
-        else if (c == ',' || c == ']')
+        else if (c == ',' || (c == ']' && !empty))
         {
             nums.push_back(temp_num * sign);
             temp_num = 0;
             sign = 1;
+        } else if (c == ']' && empty)
+        {
+            break;
         }
     }
 
@@ -129,7 +134,6 @@ void print_vector_int(vector<int> nums, fstream &out_stream)
 {
     if (nums.empty())
         out_stream << "[]";
-    
 
     for (int i = 0; i < nums.size(); i++)
     {
@@ -185,6 +189,8 @@ ListNode *read_list_node(fstream &in_stream)
     ListNode *ptr = head;
 
     int temp_num = 0, sign = 1;
+    bool empty = true;
+
     for (char c : temp)
     {
         if (c == '[')
@@ -194,12 +200,13 @@ ListNode *read_list_node(fstream &in_stream)
         else if (c >= '0' && c <= '9')
         {
             temp_num = temp_num * 10 + c - '0';
+            empty = false;
         }
         else if (c == '-')
         {
             sign = -1;
         }
-        else if (c == ',' || c == ']')
+        else if (c == ',' || (c == ']' && !empty))
         {
             ptr->next = new ListNode(sign * temp_num);
 
@@ -207,6 +214,8 @@ ListNode *read_list_node(fstream &in_stream)
 
             temp_num = 0;
             sign = 1;
+        } else if (c == ']' && empty) {
+            break;
         }
     }
 
@@ -252,7 +261,7 @@ vector<ListNode *> read_vector_list_node(fstream &in_stream)
 
             temp_num = 0;
             sign = 1;
-        } 
+        }
         else if (c == ']' && empty)
         {
             lists.push_back(head->next);
