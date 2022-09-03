@@ -155,6 +155,34 @@ void print_vector_int(vector<int> nums, fstream &out_stream)
     }
 }
 
+void print_vector_int_k(vector<int> nums, int k, fstream &out_stream)
+{
+    if (nums.empty())
+        out_stream << "[]";
+
+    if (k > nums.size())
+        k = nums.size();
+
+    for (int i = 0; i < k; i++)
+    {
+        if (i == 0)
+        {
+            out_stream << '[';
+        }
+
+        out_stream << nums[i];
+
+        if (i != k - 1)
+        {
+            out_stream << ',';
+        }
+        else
+        {
+            out_stream << ']';
+        }
+    }
+}
+
 void print_vector_vector_int(vector<vector<int>> nums, fstream &out_stream)
 {
     if (nums.empty())
