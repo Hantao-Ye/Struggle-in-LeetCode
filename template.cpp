@@ -68,7 +68,8 @@ vector<int> read_vector_int(fstream &in_stream)
             nums.push_back(temp_num * sign);
             temp_num = 0;
             sign = 1;
-        } else if (c == ']' && empty)
+        }
+        else if (c == ']' && empty)
         {
             break;
         }
@@ -242,7 +243,9 @@ ListNode *read_list_node(fstream &in_stream)
 
             temp_num = 0;
             sign = 1;
-        } else if (c == ']' && empty) {
+        }
+        else if (c == ']' && empty)
+        {
             break;
         }
     }
