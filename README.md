@@ -4,7 +4,7 @@ Personal repository recording LeetCode problem sets
 
 |LeetCode CN|LeetCode|
 |:--:|:--:|
-|![LeetCode CN](https://leetcard.jacoblin.cool/hantaoye?theme=dark&ext=heatmap&site=cn)|![LeetCode CN](https://leetcard.jacoblin.cool/Hantao-Ye?theme=dark&ext=heatmap)|
+|![LeetCode CN](https://leetcard.jacoblin.cool/hantaoye?theme=dark&font=Hubballi&ext=heatmap&site=cn)|![LeetCode CN](https://leetcard.jacoblin.cool/Hantao-Ye?theme=dark&ext=heatmap)|
 
 ```shell
 tree -L 1
