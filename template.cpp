@@ -106,6 +106,48 @@ vector<string> read_vector_string(fstream &in_stream)
     return strs;
 }
 
+vector<vector<char>> read_vector_vector_char(fstream &in_stream)
+{
+    vector<vector<char>> board;
+
+    bool insert = false;
+    bool nextLine = true;
+    while (nextLine)
+    {
+        string buffer;
+        getline(in_stream, buffer);
+
+        vector<char> line;
+        for (char c : buffer)
+        {
+            if (c == '[')
+            {
+                insert = true;
+            }
+            else if (c != ',' && c != ']')
+            {
+                line.push_back(c);
+            }
+            else if (c == ',')
+            {
+                continue;
+            }
+            else if (c == ']' && insert)
+            {
+                insert = false;
+                board.push_back(line);
+                line.clear();
+            }
+            else if (c == ']' && !insert)
+            {
+                nextLine = false;
+            }
+        }
+    }
+
+    return board;
+}
+
 void print_vector_string(vector<string> strs, fstream &out_stream)
 {
     if (strs.empty())
