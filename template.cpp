@@ -148,6 +148,51 @@ vector<vector<char>> read_vector_vector_char(fstream &in_stream)
     return board;
 }
 
+void print_vector_char(vector<char> strs, fstream &out_stream)
+{
+    if (strs.empty())
+        out_stream << "[]";
+
+    for (int i = 0; i < strs.size(); i++)
+    {
+        if (i == 0)
+        {
+            out_stream << '[';
+        }
+
+        out_stream << strs[i];
+
+        if (i != strs.size() - 1)
+        {
+            out_stream << ',';
+        }
+        else
+        {
+            out_stream << ']';
+        }
+    }
+}
+
+void print_vector_vector_char(vector<vector<char>> board, fstream &out_stream)
+{
+    for (int i = 0; i < board.size(); i++)
+    {
+        if (i == 0)
+        {
+            out_stream << '[';
+        } else {
+            out_stream << ',';
+        }
+
+        print_vector_char(board[i], out_stream);
+        if (i == board.size() - 1)
+        {
+            out_stream << ']';
+        }
+        out_stream << endl;
+    }
+}
+
 void print_vector_string(vector<string> strs, fstream &out_stream)
 {
     if (strs.empty())
