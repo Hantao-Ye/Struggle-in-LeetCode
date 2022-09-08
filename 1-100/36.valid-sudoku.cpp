@@ -399,108 +399,35 @@ class Solution
 public:
     bool isValidSudoku(vector<vector<char>> &board)
     {
-        bool ans = true;
+        vector<vector<int>> rows (9, vector<int> (9, 0));
+        vector<vector<int>> columns (9, vector<int> (9, 0));
+        vector<vector<int>> grids (9, vector<int> (9, 0));
 
-        ans &= isValidRows(board);
-        if (!ans)
-            return false;
-
-        ans &= isValidColumns(board);
-        if (!ans)
-            return false;
-
-        ans &= isValidGrids(board);
-        return ans;
-    }
-
-private:
-    bool isValidRows(vector<vector<char>> &board)
-    {
-        vector<bool> row(9, true);
-        unordered_set<int> set;
         for (int i = 0; i < 9; i++)
         {
-            set.clear();
             for (int j = 0; j < 9; j++)
             {
                 if (board[i][j] != '.')
                 {
-                    if (set.find(board[i][j] - '0') != set.end())
+                    int num = board[i][j] - '0' - 1;
+                    int k = (i / 3) * 3 + j / 3;
+                    if (rows[i][num] + columns[j][num] + grids[k][num] == 0)
                     {
-                        row[i] = false;
-                        break;
+                        rows[i][num] = 1;
+                        columns[j][num] = 1;
+                        grids[k][num] = 1;
+                    } 
+                    else 
+                    {
+                        return false;
                     }
-                    set.insert(board[i][j] - '0');
                 }
             }
-
-            if (!row[i])
-                return false;
         }
 
         return true;
     }
 
-    bool isValidColumns(vector<vector<char>> &board)
-    {
-        vector<bool> column(9, true);
-        unordered_set<int> set;
-        for (int j = 0; j < 9; j++)
-        {
-            set.clear();
-            for (int i = 0; i < 9; i++)
-            {
-                if (board[i][j] != '.')
-                {
-                    if (set.find(board[i][j] - '0') != set.end())
-                    {
-                        column[j] = false;
-                        break;
-                    }
-                    set.insert(board[i][j] - '0');
-                }
-            }
-
-            if (!column[j])
-                return false;
-        }
-
-        return true;
-    }
-
-    bool isValidGrids(vector<vector<char>> &board)
-    {
-        vector<bool> grid(9, true);
-
-        unordered_set<int> set;
-        for (int k = 0; k < 9; k++)
-        {
-            set.clear();
-            int i_min = k / 3 * 3, j_min = k % 3 * 3;
-
-            for (int i = i_min; i < i_min + 3; i++)
-            {
-                for (int j = j_min; j < j_min + 3; j++)
-                {
-
-                    if (board[i][j] != '.')
-                    {
-                        if (set.find(board[i][j] - '0') != set.end())
-                        {
-                            grid[k] = false;
-                            break;
-                        }
-                        set.insert(board[i][j] - '0');
-                    }
-                }
-            }
-
-            if (!grid[k])
-                return false;
-        }
-
-        return true;
-    }
 };
 // @lc code=end
 
